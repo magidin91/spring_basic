@@ -3,7 +3,7 @@ spring:
     active: spring.profiles.active
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/dev_db
+    url: jdbc:postgresql://localhost:5432/dev_db_task1
     username: postgres
     password: password
   jpa:
@@ -16,7 +16,7 @@ spring:
   profiles: prod
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/prod_db
+    url: jdbc:postgresql://localhost:5432/prod_db_task1
     username: postgres
     password: password
 
