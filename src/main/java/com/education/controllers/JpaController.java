@@ -1,9 +1,9 @@
-package com.education.intellekta_task1.controllers;
+package com.education.controllers;
 
-import com.education.intellekta_task1.entity.JpaProduct;
-import com.education.intellekta_task1.entity.Type;
-import com.education.intellekta_task1.jpa.ProductJpaRepository;
-import com.education.intellekta_task1.jpa.TypeJpaRepository;
+import com.education.entity.JpaProduct;
+import com.education.entity.Type;
+import com.education.jpa.ProductJpaRepository;
+import com.education.jpa.TypeJpaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

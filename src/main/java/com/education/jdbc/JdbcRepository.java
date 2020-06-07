@@ -1,7 +1,7 @@
-package com.education.intellekta_task1.jdbc;
+package com.education.jdbc;
 
-import com.education.intellekta_task1.entity.JdbcProduct;
-import com.education.intellekta_task1.entity.Type;
+import com.education.entity.JdbcProduct;
+import com.education.entity.Type;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

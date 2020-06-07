@@ -1,8 +1,8 @@
-package com.education.intellekta_task1.controllers;
+package com.education.controllers;
 
-import com.education.intellekta_task1.entity.JdbcProduct;
-import com.education.intellekta_task1.entity.Type;
-import com.education.intellekta_task1.jdbc.JdbcRepository;
+import com.education.entity.JdbcProduct;
+import com.education.entity.Type;
+import com.education.jdbc.JdbcRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

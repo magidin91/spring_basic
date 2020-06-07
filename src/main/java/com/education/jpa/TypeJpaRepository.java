@@ -1,6 +1,6 @@
-package com.education.intellekta_task1.jpa;
+package com.education.jpa;
 
-import com.education.intellekta_task1.entity.Type;
+import com.education.entity.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
