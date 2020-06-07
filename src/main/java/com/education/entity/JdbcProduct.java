@@ -1,6 +1,7 @@
-package com.education.intellekta_task1.entity;
+package com.education.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class JdbcProduct {
     private int id;
@@ -55,5 +56,22 @@ public class JdbcProduct {
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JdbcProduct that = (JdbcProduct) o;
+        return id == that.id &&
+                price == that.price &&
+                typeId == that.typeId &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(expiredDate, that.expiredDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, expiredDate, price, typeId);
     }
 }

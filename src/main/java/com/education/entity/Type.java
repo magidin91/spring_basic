@@ -1,6 +1,7 @@
-package com.education.intellekta_task1.entity;
+package com.education.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Type of product (Cheese, water, milk etc)
@@ -38,6 +39,20 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Type type = (Type) o;
+        return id == type.id &&
+                Objects.equals(name, type.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
 
