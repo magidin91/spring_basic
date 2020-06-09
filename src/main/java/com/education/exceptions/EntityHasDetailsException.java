@@ -1,0 +1,24 @@
+package com.education.exceptions;
+
+import org.springframework.util.Assert;
+
+/**
+ * Исключение выбрасывается при попытке удалить сущность, на которую есть ссылки у других сущностей
+ * (например, удаляем product, на который ссылается некоторый sales_periods)
+ */
+public class EntityHasDetailsException extends BaseException {
+    public EntityHasDetailsException(String message) {
+        super(message);
+    }
+
+    public EntityHasDetailsException(String type, Object id) {
+        this("message");
+    }
+
+    private static String formatMessage(String type, Object id) {
+        Assert.hasText(type, "Тип не может быть пустым");
+        Assert.notNull(id, "Идентификатор не может быть null");
+        Assert.hasText(id.toString(), "Идентификатор не может быть пустым");
+        return String.format("%s ссылается на удаляемый объект с идентификатором %s", type, id);
+    }
+}

@@ -1,9 +1,9 @@
 package com.education.controllers;
 
-import com.education.entity.JpaProduct;
+import com.education.entity.Product;
 import com.education.entity.Type;
-import com.education.jpa.ProductJpaRepository;
-import com.education.jpa.TypeJpaRepository;
+import com.education.jpa.ProductRepository;
+import com.education.jpa.TypeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,36 +11,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/jpa")
 public class JpaController {
-    final ProductJpaRepository productJpaRepository;
-    final TypeJpaRepository typeJpaRepository;
+    final ProductRepository productRepository;
+    final TypeRepository typeRepository;
 
-    public JpaController(ProductJpaRepository productJpaRepository, TypeJpaRepository typeJpaRepository) {
-        this.productJpaRepository = productJpaRepository;
-        this.typeJpaRepository = typeJpaRepository;
+    public JpaController(ProductRepository productRepository, TypeRepository typeRepository) {
+        this.productRepository = productRepository;
+        this.typeRepository = typeRepository;
     }
 
     @GetMapping("/products")
-    public List<JpaProduct> getProducts() {
-        return productJpaRepository.findAll();
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
 
     @GetMapping("/types")
     public List<Type> getTypes() {
-        return typeJpaRepository.findAll();
+        return typeRepository.findAll();
     }
 
     @PostMapping("/save/product")
-    public JpaProduct addProduct(@RequestBody JpaProduct product) {
-        return productJpaRepository.save(product);
+    public Product addProduct(@RequestBody Product product) {
+        return productRepository.save(product);
     }
 
     @PostMapping("/save/type")
     public Type addType(@RequestBody Type type) {
-        return typeJpaRepository.save(type);
+        return typeRepository.save(type);
     }
 
     @PostMapping("/product/byname")
-    List<JpaProduct> findByName(@RequestBody String name) {
-        return productJpaRepository.findByName(name);
+    List<Product> findByName(@RequestBody String name) {
+        return productRepository.findByName(name);
     }
 }
