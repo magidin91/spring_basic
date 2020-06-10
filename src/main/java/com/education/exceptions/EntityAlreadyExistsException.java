@@ -11,7 +11,7 @@ public class EntityAlreadyExistsException extends BaseException {
     }
 
     public EntityAlreadyExistsException(String type, Object id) {
-        this("message");
+        this(formatMessage(type, id));
     }
 
     private static String formatMessage(String type, Object id) {

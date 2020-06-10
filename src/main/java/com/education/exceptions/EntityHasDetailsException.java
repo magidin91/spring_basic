@@ -12,7 +12,7 @@ public class EntityHasDetailsException extends BaseException {
     }
 
     public EntityHasDetailsException(String type, Object id) {
-        this("message");
+        this(formatMessage(type, id));
     }
 
     private static String formatMessage(String type, Object id) {
