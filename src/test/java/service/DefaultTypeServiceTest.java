@@ -6,7 +6,7 @@ import com.education.exceptions.EntityHasDetailsException;
 import com.education.exceptions.EntityIllegalArgumentException;
 import com.education.exceptions.EntityNotFoundException;
 import com.education.jpa.TypeRepository;
-import com.education.service.TypeService;
+import com.education.service.impl.DefaultTypeService;
 import config.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +26,9 @@ import static org.junit.Assert.assertTrue;
 @Transactional
 @SpringBootTest
 @ContextConfiguration(classes = {TestConfig.class})
-public class TypeServiceTest {
+public class DefaultTypeServiceTest {
     @Autowired
-    private TypeService typeService;
+    private DefaultTypeService defaultTypeService;
 
     @Autowired
     private TypeRepository typeRepository;
@@ -37,62 +37,62 @@ public class TypeServiceTest {
     public void findAllTest() {
         List<Type> exp = List.of(
                 new Type(1, "Сыр"), new Type(2, "Молоко"), new Type(3, "Мороженое"));
-        assertTrue(typeService.findAll().containsAll(exp));
+        assertTrue(defaultTypeService.findAll().containsAll(exp));
     }
 
     @Test
     public void findByIdTest() {
         Type type = new Type(1, "Сыр");
-        assertEquals(type, typeService.findById(1));
+        assertEquals(type, defaultTypeService.findById(1));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByNullIdTest() {
-        typeService.findById(null);
+        defaultTypeService.findById(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByWrongFormatIdTest() {
-        typeService.findById("wrong id");
+        defaultTypeService.findById("wrong id");
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void findByNotExistedIdTest() {
-        typeService.findById(-1);
+        defaultTypeService.findById(-1);
     }
 
     @Test
     public void createTypeTest() {
         Type type = new Type(4, "Тест");
-        typeService.create(type);
+        defaultTypeService.create(type);
         assertEquals(type, typeRepository.findById(4).get());
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNUllTypeTest() {
-        typeService.create(null);
+        defaultTypeService.create(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createTypeWithNullIdTest() {
-        typeService.create(new Type(null, "Тест"));
+        defaultTypeService.create(new Type(null, "Тест"));
     }
 
 
     @Test(expected = EntityAlreadyExistsException.class)
     public void createTypeAlreadyExists() {
-        typeService.create(new Type(1, "Сыр"));
+        defaultTypeService.create(new Type(1, "Сыр"));
     }
 
     @Test(expected = EntityHasDetailsException.class)
     public void deleteTypeWithDetails() {
-       typeService.delete(1);
+       defaultTypeService.delete(1);
     }
 
     @Test
     public void deleteType() {
         typeRepository.save( new Type(5, "Тест"));
-        typeService.findAll().forEach(System.out::println);
-        typeService.delete(5);
+        defaultTypeService.findAll().forEach(System.out::println);
+        defaultTypeService.delete(5);
     }
 }

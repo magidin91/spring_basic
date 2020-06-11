@@ -6,7 +6,7 @@ import com.education.exceptions.EntityAlreadyExistsException;
 import com.education.exceptions.EntityIllegalArgumentException;
 import com.education.exceptions.EntityNotFoundException;
 import com.education.jpa.ProductRepository;
-import com.education.service.ProductService;
+import com.education.service.impl.DefaultProductService;
 import config.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +26,9 @@ import static org.junit.Assert.assertTrue;
 @Transactional
 @SpringBootTest
 @ContextConfiguration(classes = {TestConfig.class})
-public class ProductServiceTest {
+public class DefaultProductServiceTest {
     @Autowired
-    private ProductService productService;
+    private DefaultProductService defaultProductService;
 
     @Autowired
     private ProductRepository productRepository;
@@ -43,71 +43,71 @@ public class ProductServiceTest {
                 new Product(3, "Молоко нытвенское_тест",
                         Date.valueOf("2020-05-25"), 1, new Type(2, "Молоко"))
         );
-        assertTrue(productService.findAll().containsAll(exp));
+        assertTrue(defaultProductService.findAll().containsAll(exp));
     }
 
     @Test
     public void findByIdTest() {
         Product product = new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое"));
-        assertEquals(product, productService.findById(1));
+        assertEquals(product, defaultProductService.findById(1));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByNullIdTest() {
-        productService.findById(null);
+        defaultProductService.findById(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByWrongFormatIdTest() {
-        productService.findById("wrong id");
+        defaultProductService.findById("wrong id");
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void findByNotExistedIdTest() {
-        productService.findById(-1);
+        defaultProductService.findById(-1);
     }
 
     @Test
     public void createProductTest() {
         Product product = new Product(4, "test1",
                 Date.valueOf("2020-06-07"), 1, new Type(1, "Сыр"));
-        productService.create(product);
+        defaultProductService.create(product);
         assertEquals(product, productRepository.findById(4).get());
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNUllProductTest() {
-        productService.create(null);
+        defaultProductService.create(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullIdTest() {
-        productService.create(new Product(null, "Эскимо_тест",
+        defaultProductService.create(new Product(null, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое")));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullTypeTest() {
-        productService.create(new Product(1, "Эскимо_тест",
+        defaultProductService.create(new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, null));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullTypeIdTest() {
-        productService.create(new Product(1, "Эскимо_тест",
+        defaultProductService.create(new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(null, "Мороженое")));
     }
 
     @Test(expected = EntityAlreadyExistsException.class)
     public void createProductAlreadyExistsTest() {
-        productService.create(new Product(1, "тест",
+        defaultProductService.create(new Product(1, "тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое")));
     }
 
     @Test
     public void deleteTest() {
-        productService.delete(1);
+        defaultProductService.delete(1);
         assertTrue(productRepository.findById(1).isEmpty());
     }
 }
