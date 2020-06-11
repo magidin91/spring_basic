@@ -12,7 +12,8 @@ public class ExceptionController {
 
     @ExceptionHandler(EntityIllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody     private ErrorResponseEntity handleEntityIllegalArgumentException(EntityIllegalArgumentException e) {
+    @ResponseBody
+    private ErrorResponseEntity handleEntityIllegalArgumentException(EntityIllegalArgumentException e) {
         return createErrorResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
 
@@ -45,6 +46,6 @@ public class ExceptionController {
     }
 
     private static ErrorResponseEntity createErrorResponseEntity(BaseException e, HttpStatus httpStatus) {
-       return new ErrorResponseEntity(e.getMessage(), httpStatus.getReasonPhrase(), httpStatus.value());
+        return new ErrorResponseEntity(e.getMessage(), httpStatus.getReasonPhrase(), httpStatus.value());
     }
 }
