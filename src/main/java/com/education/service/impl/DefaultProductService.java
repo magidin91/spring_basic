@@ -1,5 +1,6 @@
 package com.education.service.impl;
 
+import com.education.annotation.Loggable;
 import com.education.entity.Product;
 import com.education.entity.Type;
 import com.education.exceptions.ExceptionThrower;
@@ -17,6 +18,7 @@ public class DefaultProductService implements ProductService {
         this.productRepository = productRepository;
     }
 
+    @Loggable
     public List<Product> findAll() {
         return productRepository.findAll();
     }
