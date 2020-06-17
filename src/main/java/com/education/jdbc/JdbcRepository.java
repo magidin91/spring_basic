@@ -52,7 +52,7 @@ public class JdbcRepository {
      * Returns products with a price less than or equal to the specified price
      */
     public List<JdbcProduct> getProductsPriceIsLower(int price) {
-        return jdbcTemplate.query(String.format("select* from product where price<=%s", price),
+        return jdbcTemplate.query(String.format("select* from product where price<=%d", price),
                 (rs, rowNum) -> new JdbcProduct(
                         rs.getInt("id"),
                         rs.getString("name"),
