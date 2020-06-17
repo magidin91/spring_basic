@@ -4,7 +4,7 @@ import com.education.annotation.Loggable;
 import com.education.entity.Product;
 import com.education.entity.Type;
 import com.education.exceptions.ExceptionThrower;
-import com.education.jpa.ProductRepository;
+import com.education.repositories.ProductRepository;
 import com.education.service.ProductService;
 import org.springframework.stereotype.Service;
 

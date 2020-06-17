@@ -5,7 +5,7 @@ import com.education.exceptions.EntityAlreadyExistsException;
 import com.education.exceptions.EntityHasDetailsException;
 import com.education.exceptions.EntityIllegalArgumentException;
 import com.education.exceptions.EntityNotFoundException;
-import com.education.jpa.TypeRepository;
+import com.education.repositories.TypeRepository;
 import com.education.service.impl.DefaultTypeService;
 import config.TestConfig;
 import org.junit.Test;

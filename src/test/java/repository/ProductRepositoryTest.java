@@ -2,7 +2,7 @@ package repository;
 
 import com.education.entity.Product;
 import com.education.entity.Type;
-import com.education.jpa.ProductRepository;
+import com.education.repositories.ProductRepository;
 import config.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;

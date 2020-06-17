@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableAutoConfiguration
-@EnableJpaRepositories(basePackages = {"com.education.jpa"})
+@EnableJpaRepositories(basePackages = {"com.education.repositories"})
 @ComponentScan(basePackages = {"com.education.service"})
 @EntityScan(basePackages = {"com.education.entity"})
 public class TestConfig {

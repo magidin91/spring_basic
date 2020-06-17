@@ -1,4 +1,4 @@
-package com.education.jpa;
+package com.education.repositories;
 
 import com.education.entity.Product;
 import com.education.entity.Type;

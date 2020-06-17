@@ -3,8 +3,8 @@ package com.education.service.impl;
 import com.education.entity.Product;
 import com.education.entity.Type;
 import com.education.exceptions.*;
-import com.education.jpa.ProductRepository;
-import com.education.jpa.TypeRepository;
+import com.education.repositories.ProductRepository;
+import com.education.repositories.TypeRepository;
 import com.education.service.TypeService;
 import org.springframework.stereotype.Service;
 
