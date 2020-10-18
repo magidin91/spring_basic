@@ -18,8 +18,8 @@ public class ProductController {
     }
 
     /**
-     * После аутентификации вызывается doFilter- >hasPermission и проверяет права юзера.
-     * Если у него есть право чтения 'product', 'read'), то вызывается метод findAll
+     * После аутентификации вызывается doFilter-> hasPermission и проверяет права юзера.
+     * Если у него есть право чтения ('product', 'read'), то вызывается метод findAll
      */
     @GetMapping
     @PreAuthorize("hasPermission('product', 'read')")
@@ -35,7 +35,7 @@ public class ProductController {
 
     @PostMapping
     @PreAuthorize("hasPermission('product', 'create')")
-    @ResponseStatus(HttpStatus.CREATED) //http статус запроса
+    @ResponseStatus(HttpStatus.CREATED)
     Product create(@RequestBody Product product) {
         return productService.create(product);
     }

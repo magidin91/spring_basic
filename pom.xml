@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+<!--The spring-boot-starter-parent project is a special starter project – that provides default configurations
+for our application and a complete dependency tree to quickly build our Spring Boot project.-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
-
 	</parent>
 	<groupId>com.education</groupId>
-	<artifactId>intellekta_task1</artifactId>
+	<artifactId>spring_basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>intellekta_task1</name>
+	<name>spring_basic</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -36,7 +37,8 @@
 			</properties>
 		</profile>
 	</profiles>
-
+<!-- we don't need to define versions of the dependencies, Maven will download jar files
+based on the version defined for spring-boot-starter-parent in the parent tag. -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -84,7 +86,6 @@
 		<!-- security -->
 	</dependencies>
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

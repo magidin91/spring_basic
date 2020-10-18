@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(SecurityConfig.class)
-public class IntellektaTask1Application {
+public class SpringBasicApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(IntellektaTask1Application.class, args);
+		SpringApplication.run(SpringBasicApplication.class, args);
 	}
 }
