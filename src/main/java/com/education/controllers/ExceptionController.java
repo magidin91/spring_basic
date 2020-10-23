@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(EntityIllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
+    @ExceptionHandler(EntityIllegalArgumentException.class) // исключение, которое должны обработать - EntityIllegalArgumentException
+    @ResponseStatus(HttpStatus.BAD_REQUEST) // статус, который должны вернуть
+    @ResponseBody //указываем, что в ответе придет не пустота, а body ErrorResponseEntity
     private ErrorResponseEntity handleEntityIllegalArgumentException(EntityIllegalArgumentException e) {
         return createErrorResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
@@ -45,6 +45,12 @@ public class ExceptionController {
         return createErrorResponseEntity(e, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Фабрика для удобного создания объекта ErrorResponseEntity
+     * @param e перехватываемая ошибка
+     * @param httpStatus
+     * @return ErrorResponseEntity
+     */
     private static ErrorResponseEntity createErrorResponseEntity(BaseException e, HttpStatus httpStatus) {
         return new ErrorResponseEntity(e.getMessage(), httpStatus.getReasonPhrase(), httpStatus.value());
     }

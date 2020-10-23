@@ -21,8 +21,8 @@ import static org.springframework.util.StringUtils.hasText;
 public class TokenAuthenticationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenAuthenticationService.class);
     private final static String SECRET = "Secret"; //ключ шифрования
-    private final static long EXPIRATION_DATE = 864_000_000; // 10 ДНЕЙ, время окончания токена
-    private final static String TOKEN_PREFIX = "Bearer";
+    private final static long EXPIRATION_DATE = 864_000_000; // 10 ДНЕЙ, время действия токена после авторизации
+    private final static String TOKEN_PREFIX = "Bearer"; // общепринятый префикс
     private final static String HEADER_STRING = "Authorization"; //ключ заголовка, его value - токен
 
     private static SecurityUserDetailsManager userDetailsManager;
@@ -32,20 +32,21 @@ public class TokenAuthenticationService {
     }
 
     /**
-     * Добавляет в ответ токен при успешной авторизации
+     * Данный метод вызывается в successfulAuthentication при успешнйо авторизации
+     * Он добавляет в заголовок риспонса пользователю ключ и значение: "Authorization" - сгенерированный токен
      */
     static void addAuthentication(HttpServletResponse response, String username) {
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + generateToken(username));
     }
 
     /**
-     * Генерирует Authentication токен
+     * Генерирует Authentication токен при попытке логина
      */
     private static String generateToken(String userName) {
         return Jwts.builder()
                 .setSubject(userName)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_DATE))
-                .signWith(SignatureAlgorithm.HS512, SECRET) //шифруем токен
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_DATE)) // устнавливаем дату экспирации токена
+                .signWith(SignatureAlgorithm.HS512, SECRET) //шифруем токен по нашему секретному слову
                 .compact();
     }
 
@@ -59,7 +60,7 @@ public class TokenAuthenticationService {
         }
         /* можно сделать проверку наличия сессии по токену */
         String userName = getUsername(token);
-        UserDetails user = userDetailsManager.loadUserByUsername(userName); //нашли юзера из БД (хранлища)
+        UserDetails user = userDetailsManager.loadUserByUsername(userName); //нашли юзера из БД (хранилища)
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 user, null, user.getAuthorities() //указываем юзера и его права
         );
@@ -67,7 +68,7 @@ public class TokenAuthenticationService {
     }
 
     /**
-     * Получаем токен без префикса из входящего запроса
+     * Получаем токен (без префикса) из заголовка входящего запроса
      */
     private static String getToken(HttpServletRequest request) {
         if (request.getHeader(HEADER_STRING) != null) {

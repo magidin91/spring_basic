@@ -3,7 +3,7 @@ package com.education.security;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * Привелегии юзера
+ * Класс разрешения юзера
  */
 public class SecurityPermission implements GrantedAuthority {
     private String name;

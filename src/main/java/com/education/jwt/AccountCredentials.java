@@ -1,7 +1,7 @@
 package com.education.jwt;
 
 /**
- * маппим в этот объект юзернейм и пассворд из входящего при логине json
+ * маппим в этот объект юзернейм и пассворд из получаемого при логине json
  */
 public class AccountCredentials {
     private String username;

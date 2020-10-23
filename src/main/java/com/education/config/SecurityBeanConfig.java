@@ -7,7 +7,7 @@ import org.springframework.security.access.expression.method.DefaultMethodSecuri
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 /**
- * Бины необходимые дял проверки защищенности методов контроллера
+ * Бины необходимые для проверки защищенности методов контроллера
  */
 public class SecurityBeanConfig {
     @Bean

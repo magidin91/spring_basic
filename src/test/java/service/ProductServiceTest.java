@@ -6,7 +6,7 @@ import com.education.exceptions.EntityAlreadyExistsException;
 import com.education.exceptions.EntityIllegalArgumentException;
 import com.education.exceptions.EntityNotFoundException;
 import com.education.repositories.ProductRepository;
-import com.education.service.impl.DefaultProductService;
+import com.education.service.ProductService;
 import config.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +26,9 @@ import static org.junit.Assert.assertTrue;
 @Transactional
 @SpringBootTest
 @ContextConfiguration(classes = {TestConfig.class})
-public class DefaultProductServiceTest {
+public class ProductServiceTest {
     @Autowired
-    private DefaultProductService defaultProductService;
+    private ProductService productService;
 
     @Autowired
     private ProductRepository productRepository;
@@ -43,71 +43,71 @@ public class DefaultProductServiceTest {
                 new Product(3, "Молоко нытвенское_тест",
                         Date.valueOf("2020-05-25"), 1, new Type(2, "Молоко"))
         );
-        assertTrue(defaultProductService.findAll().containsAll(exp));
+        assertTrue(productService.findAll().containsAll(exp));
     }
 
     @Test
     public void findByIdTest() {
         Product product = new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое"));
-        assertEquals(product, defaultProductService.findById(1));
+        assertEquals(product, productService.findById(1));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByNullIdTest() {
-        defaultProductService.findById(null);
+        productService.findById(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void findByWrongFormatIdTest() {
-        defaultProductService.findById("wrong id");
+        productService.findById("wrong id");
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void findByNotExistedIdTest() {
-        defaultProductService.findById(-1);
+        productService.findById(-1);
     }
 
     @Test
     public void createProductTest() {
         Product product = new Product(4, "test1",
                 Date.valueOf("2020-06-07"), 1, new Type(1, "Сыр"));
-        defaultProductService.create(product);
+        productService.create(product);
         assertEquals(product, productRepository.findById(4).get());
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNUllProductTest() {
-        defaultProductService.create(null);
+        productService.create(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullIdTest() {
-        defaultProductService.create(new Product(null, "Эскимо_тест",
+        productService.create(new Product(null, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое")));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullTypeTest() {
-        defaultProductService.create(new Product(1, "Эскимо_тест",
+        productService.create(new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, null));
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createProductWithNullTypeIdTest() {
-        defaultProductService.create(new Product(1, "Эскимо_тест",
+        productService.create(new Product(1, "Эскимо_тест",
                 Date.valueOf("2020-03-25"), 10, new Type(null, "Мороженое")));
     }
 
     @Test(expected = EntityAlreadyExistsException.class)
     public void createProductAlreadyExistsTest() {
-        defaultProductService.create(new Product(1, "тест",
+        productService.create(new Product(1, "тест",
                 Date.valueOf("2020-03-25"), 10, new Type(3, "Мороженое")));
     }
 
     @Test
     public void deleteTest() {
-        defaultProductService.delete(1);
+        productService.delete(1);
         assertTrue(productRepository.findById(1).isEmpty());
     }
 }

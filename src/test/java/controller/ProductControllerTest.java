@@ -56,7 +56,10 @@ public class ProductControllerTest {
         Product product = new Product(4, "testProduct",
                 Date.valueOf("2020-03-25"), 0, new Type(3, "Мороженое"));
         String requestJson = mapper.writeValueAsString(product);
-        mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)
+        mockMvc.perform(
+                post(URL)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(requestJson)
         ).andExpect(status().isCreated());
     }
 
@@ -65,7 +68,10 @@ public class ProductControllerTest {
         Product product = new Product(1, "testProduct",
                 Date.valueOf("2020-03-25"), 0, new Type(3, "Мороженое"));
         String requestJson = mapper.writeValueAsString(product);
-        mockMvc.perform(put(URL).contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)
+        mockMvc.perform(
+                put(URL)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(requestJson)
         ).andExpect(status().isOk());
     }
 
